@@ -714,7 +714,7 @@ export default function ChatPage() {
       // Try to extract parts and costs from the message
       // Look for patterns like "Turbocharger: R25,000" or "Labor (6 hrs): R4,800"
       const lines = content.split('\n');
-      lines.forEach(line => {
+      lines.forEach((line: string) => {
         // Match part costs
         const partMatch = line.match(/[-•]\s*([^:]+):\s*R?\s*([\d,]+)/i);
         if (partMatch) {
