@@ -96,8 +96,8 @@ export async function POST(request: NextRequest) {
         }
         
         if (creditResult) {
-          console.log('Credits deducted. New balance:', creditResult.balance);
-          result.credits = creditResult.balance;
+          console.log('Credits deducted. New balance:', (creditResult as any).balance);
+          result.credits = (creditResult as any).balance;
         } else {
           console.log('No credit result returned');
         }
