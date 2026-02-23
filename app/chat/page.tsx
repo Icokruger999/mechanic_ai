@@ -198,7 +198,7 @@ export default function ChatPage() {
     if (chat) {
       setCurrentChatId(chatId);
       setMessages(chat.messages);
-      setCurrentMode(chat.mode || "casual");
+      setCurrentMode((chat.mode || "casual") as "casual" | "mechanic");
       
       // Extract vehicle info from loaded chat messages (only from user messages to avoid AI language)
       if (chat.messages.length > 0) {
