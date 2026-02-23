@@ -673,7 +673,7 @@ export default function ChatPage() {
               </div>
               <div class="info-item">
                 <div class="info-label">Diagnostic Mode</div>
-                <div class="info-value">${mode === 'casual' ? 'Casual' : 'Professional Mechanic'}</div>
+                <div class="info-value">${currentMode === 'casual' ? 'Casual' : 'Professional Mechanic'}</div>
               </div>
             </div>
           </div>
