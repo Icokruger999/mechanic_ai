@@ -1132,7 +1132,7 @@ export default function ChatPage() {
                         const lines = msg.content.split('\n');
                         
                         // Check if message has any section headers
-                        const hasSections = lines.some(line => /^[A-Z\s]+:$/.test(line.trim()));
+                        const hasSections = lines.some((line: string) => /^[A-Z\s]+:$/.test(line.trim()));
                         
                         // If no sections, render normally
                         if (!hasSections) {
