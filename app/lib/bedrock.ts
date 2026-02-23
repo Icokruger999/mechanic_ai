@@ -27,6 +27,7 @@ export interface DiagnosticRequest {
 
 export interface DiagnosticResponse {
   response: string;
+  credits?: number;
   diagnostic: {
     component: string;
     status: "LOW" | "MEDIUM" | "HIGH";
