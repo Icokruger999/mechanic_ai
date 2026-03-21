@@ -3,20 +3,15 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-function decodeEntities(str: string) {
-  let s = str;
-  s = s.replace(/â€¢/g, '');
-  s = s.replace(/•/g, '');
-  s = s.replace(/&#39;|&#x27;/g, "'");
-  s = s.replace(/&amp;/g, "&");
-  s = s.replace(/&lt;/g, "<");
-  s = s.replace(/&gt;/g, ">");
-  s = s.replace(/&quot;/g, '"');
-  // Strip all non-ASCII characters from the beginning
-  while (s.length > 0 && s.charCodeAt(0) > 127) {
-    s = s.substring(1);
-  }
-  return s.trim();
+function cleanText(str: string) {
+  return str
+    .replace(/&#39;|&#x27;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/[^\x20-\x7E]/g, '')
+    .trim();
 }
 
 export default function ChatPage() {
@@ -1440,7 +1435,7 @@ export default function ChatPage() {
               <div className="section-title">What I'll Check:</div>
               <ul className="check-list">
                 {diagnostic.checks.map((check: string, idx: number) => (
-                  <li key={idx}>{decodeEntities(check)}</li>
+                  <li key={idx}>{cleanText(check)}</li>
                 ))}
               </ul>
             </div>
