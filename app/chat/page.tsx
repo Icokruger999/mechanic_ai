@@ -3,6 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
+function decodeEntities(str: string) {
+  return str.replace(/&#39;/g, "'").replace(/&#x27;/g, "'").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+}
+
 export default function ChatPage() {
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState("");
@@ -1424,7 +1428,7 @@ export default function ChatPage() {
               <div className="section-title">What I'll Check:</div>
               <ul className="check-list">
                 {diagnostic.checks.map((check: string, idx: number) => (
-                  <li key={idx}>{check}</li>
+                  <li key={idx}>{decodeEntities(check)}</li>
                 ))}
               </ul>
             </div>
