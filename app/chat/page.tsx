@@ -5,15 +5,20 @@ import Link from "next/link";
 
 function decodeEntities(str: string) {
   return str
-    .replace(/\u00e2\u0080[\u0090-\u009f]/g, "'")
-    .replace(/\u00c3[\u00a0-\u00bf]/g, "")
-    .replace(/\u00e2\u0080\u00a2/g, "")
+    .replace(/\xc3[\xa0-\xbf]/g, "")
+    .replace(/\xc2[\x80-\xbf]/g, "")
+    .replace(/\xe2\x80[\x90-\x9f]/g, "'")
+    .replace(/\xe2\x80\xa2/g, "")
+    .replace(/\xe2\x80[\xa0-\xbf]/g, "")
     .replace(/&#39;|&#x27;/g, "'")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
-    .replace(/^[\s\u00e2\u00c2\u0080\u0099\u201c\u201d\u2018\u2019\u2022]+/, "")
+    .replace(/[\u00e2][\u0080][\u0090-\u009f]/g, "'")
+    .replace(/[\u00e2][\u0080][\u00a2]/g, "")
+    .replace(/[\u00c2][\u00a0-\u00bf]/g, "")
+    .replace(/^[^a-zA-Z0-9(]+/, "")
     .trim();
 }
 

@@ -126,11 +126,23 @@ function parseDiagnostic(text: string, currency: string) {
   const partKeywords = [
     "Engine", "Transmission", "Brakes", "Battery", "Alternator", "Starter",
     "Radiator", "Thermostat", "Suspension", "Steering", "Exhaust", "Clutch",
-    "Turbo", "Fuel Pump", "Spark Plugs", "Oil Filter", "Air Filter",
+    "Turbo", "Turbocharger", "Fuel Pump", "Spark Plugs", "Oil Filter", "Air Filter",
+    "Intercooler", "Wastegate", "Boost", "ECU", "Injector", "Timing Belt",
+    "Timing Chain", "Water Pump", "Compressor", "Catalytic Converter", "Gearbox",
+    "Differential", "CV Joint", "Wheel Bearing", "Shock Absorber", "Strut",
+    "Control Arm", "Tie Rod", "Brake Pad", "Brake Disc", "Rotor", "Caliper",
+    "Head Gasket", "Valve", "Piston", "Crankshaft", "Camshaft", "Sensor",
+    "Oxygen Sensor", "MAF Sensor", "Coolant", "Oil Pump", "Power Steering",
   ];
+  const seen = new Set<string>();
   const relatedParts = partKeywords
-    .filter((p) => text.toLowerCase().includes(p.toLowerCase()))
-    .slice(0, 8)
+    .filter((p) => {
+      const key = p.toLowerCase();
+      if (seen.has(key) || !text.toLowerCase().includes(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 10)
     .map((name) => ({
       name,
       status: highWords.test(text) && text.toLowerCase().indexOf(name.toLowerCase()) !== -1
