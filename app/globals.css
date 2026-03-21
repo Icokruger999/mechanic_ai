@@ -867,7 +867,7 @@ body.resizing * {
 }
 
 .check-list li::before {
-  content: 'â€¢';
+  content: '\2022';
   position: absolute;
   left: 0;
   color: rgba(255, 255, 255, 0.4);
