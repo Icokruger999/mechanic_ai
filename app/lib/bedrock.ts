@@ -57,7 +57,7 @@ export async function getDiagnostic(input: DiagnosticInput) {
   });
 
   const command = new InvokeModelCommand({
-    modelId: "anthropic.claude-3-5-sonnet-20241022-v2:0",
+    modelId: "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
     contentType: "application/json",
     accept: "application/json",
     body,

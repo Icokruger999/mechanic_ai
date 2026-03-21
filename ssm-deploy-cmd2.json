@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "tail -50 /var/log/mechanic-ai-error.log 2>/dev/null; echo '---'; pm2 logs mechanic-ai --err --nostream --lines 30 2>/dev/null"
+  ]
+}
