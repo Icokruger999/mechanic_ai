@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "cd /var/www/mechanic-ai && git stash && git pull origin master && npm install && rm -rf .next && npm run build && pm2 restart mechanic-ai && pm2 save && echo DEPLOY_SUCCESS"
+  ]
+}

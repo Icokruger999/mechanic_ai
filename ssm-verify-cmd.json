@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "pm2 jlist | python3 -c \"import sys,json; apps=json.load(sys.stdin); print('APP:', apps[0]['name'], 'STATUS:', apps[0]['pm2_env']['status'])\" 2>/dev/null; curl -s -o /dev/null -w 'HTTP_STATUS:%{http_code}' http://localhost:3001"
+  ]
+}
