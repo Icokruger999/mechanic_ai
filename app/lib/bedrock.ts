@@ -73,6 +73,10 @@ export async function getDiagnostic(input: DiagnosticInput) {
   return { response: aiResponse, diagnostic };
 }
 
+function decodeEntities(str: string) {
+  return str.replace(/&#39;/g, "'").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+}
+
 function parseDiagnostic(text: string, currency: string) {
   // Extract component name from context
   const componentPatterns = [
@@ -105,7 +109,7 @@ function parseDiagnostic(text: string, currency: string) {
   const lines = text.split("\n");
   for (const line of lines) {
     const bullet = line.match(/^[\s]*[-•✓]\s+(.{10,80})/);
-    if (bullet && checks.length < 6) checks.push(bullet[1].trim());
+    if (bullet && checks.length < 6) checks.push(decodeEntities(bullet[1].trim()));
   }
   if (checks.length === 0) checks.push("Visual inspection", "Component test", "System scan");
 
@@ -129,5 +133,5 @@ function parseDiagnostic(text: string, currency: string) {
     relatedParts.push({ name: component, status: status === "High" ? "Bad" : "Check" });
   }
 
-  return { component, status, costMin, costMax, checks, relatedParts };
+  return { component: decodeEntities(component), status, costMin, costMax, checks, relatedParts };
 }
