@@ -4,7 +4,17 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 function decodeEntities(str: string) {
-  return str.replace(/&#39;/g, "'").replace(/&#x27;/g, "'").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+  return str
+    .replace(/\u00e2\u0080[\u0090-\u009f]/g, "'")
+    .replace(/\u00c3[\u00a0-\u00bf]/g, "")
+    .replace(/\u00e2\u0080\u00a2/g, "")
+    .replace(/&#39;|&#x27;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/^[\s\u00e2\u00c2\u0080\u0099\u201c\u201d\u2018\u2019\u2022]+/, "")
+    .trim();
 }
 
 export default function ChatPage() {

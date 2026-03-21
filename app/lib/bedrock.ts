@@ -108,8 +108,17 @@ function parseDiagnostic(text: string, currency: string) {
   const checks: string[] = [];
   const lines = text.split("\n");
   for (const line of lines) {
-    const bullet = line.match(/^[\s]*[-•✓]\s+(.{10,80})/);
-    if (bullet && checks.length < 6) checks.push(decodeEntities(bullet[1].trim()));
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const bullet = trimmed.match(/^(?:[-*>]|\d+[.)])\s+(.+)/);
+    if (bullet && checks.length < 8) {
+      const clean = bullet[1].trim()
+        .replace(/[\u2018\u2019\u201C\u201D]/g, "'")
+        .replace(/&#39;|&#x27;/g, "'")
+        .replace(/&amp;/g, "&")
+        .replace(/&quot;/g, '"');
+      if (clean.length > 5) checks.push(clean);
+    }
   }
   if (checks.length === 0) checks.push("Visual inspection", "Component test", "System scan");
 
