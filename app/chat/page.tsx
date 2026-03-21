@@ -881,7 +881,7 @@ export default function ChatPage() {
     <div className="chat-container">
       {/* Mobile Header */}
       <div className="mobile-header">
-        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)}>☰</button>
+        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)}>{"\u2630"}</button>
         <span className="mobile-header-title">Mechanic <span style={{ color: '#ef4444' }}>AI</span></span>
         <span className="credits-text" style={{ color: credits <= 0 ? '#d32f2f' : credits <= 5 ? '#fbbf24' : '#10b981', fontSize: '0.75rem' }}>
           {credits} credits
