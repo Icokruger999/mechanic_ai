@@ -50,6 +50,7 @@ export default function ChatPage() {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   });
   const [chatsLoaded, setChatsLoaded] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Helper function to scroll to bottom
@@ -198,6 +199,7 @@ export default function ChatPage() {
     if (chat) {
       setCurrentChatId(chatId);
       setMessages(chat.messages);
+      setSidebarOpen(false);
       setCurrentMode((chat.mode || "casual") as "casual" | "mechanic");
       
       // Extract vehicle info from loaded chat messages (only from user messages to avoid AI language)
@@ -877,8 +879,20 @@ export default function ChatPage() {
 
   return (
     <div className="chat-container">
+      {/* Mobile Header */}
+      <div className="mobile-header">
+        <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)}>☰</button>
+        <span className="mobile-header-title">Mechanic <span style={{ color: '#ef4444' }}>AI</span></span>
+        <span className="credits-text" style={{ color: credits <= 0 ? '#d32f2f' : credits <= 5 ? '#fbbf24' : '#10b981', fontSize: '0.75rem' }}>
+          {credits} credits
+        </span>
+      </div>
+
+      {/* Sidebar Overlay */}
+      <div className={`sidebar-overlay ${sidebarOpen ? 'visible' : ''}`} onClick={() => setSidebarOpen(false)} />
+
       {/* Sidebar */}
-      <aside className="sidebar" style={{ width: `${sidebarWidth}px` }}>
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`} style={{ width: `${sidebarWidth}px` }}>
         <div className="sidebar-header">
           <h2 style={{ color: 'white', fontSize: '1.25rem', fontWeight: '300', marginBottom: '0.25rem' }}>
             Mechanic <span style={{ 
@@ -966,6 +980,7 @@ export default function ChatPage() {
             onClick={() => {
               setFilterMode("casual");
               setCurrentMode("casual");
+              setSidebarOpen(false);
             }}
             title="Show casual chats (1 credit per message)"
           >
@@ -976,15 +991,16 @@ export default function ChatPage() {
             onClick={() => {
               setFilterMode("mechanic");
               setCurrentMode("mechanic");
+              setSidebarOpen(false);
             }}
             title="Show mechanic chats (2 credits per message)"
           >
             Mechanic Mode
           </button>
-          <Link href="/pricing" className="footer-button">View Pricing</Link>
-          <Link href="/feedback" className="footer-button">Feedback</Link>
-          <Link href="/usage" className="footer-button">Usage</Link>
-          <Link href="/" className="footer-button">Logout</Link>
+          <Link href="/pricing" className="footer-button" onClick={() => setSidebarOpen(false)}>View Pricing</Link>
+          <Link href="/feedback" className="footer-button" onClick={() => setSidebarOpen(false)}>Feedback</Link>
+          <Link href="/usage" className="footer-button" onClick={() => setSidebarOpen(false)}>Usage</Link>
+          <Link href="/" className="footer-button" onClick={() => setSidebarOpen(false)}>Logout</Link>
         </div>
         
         {/* Resize Handle */}

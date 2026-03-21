@@ -30,11 +30,12 @@ export default function Home() {
         {/* Subtitle positioned below the car */}
         <div style={{ 
           position: 'absolute', 
-          bottom: '5rem', 
+          bottom: '2rem', 
           left: '0', 
           right: '0',
           textAlign: 'center',
-          zIndex: 10
+          zIndex: 10,
+          padding: '0 1rem'
         }}>
           <p style={{
             fontSize: '1rem',
@@ -49,7 +50,7 @@ export default function Home() {
       {/* Services & Features Section */}
       <section style={{
         background: '#0a0a0a',
-        padding: '5rem 2rem',
+        padding: '3rem 1rem',
         borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -65,8 +66,8 @@ export default function Home() {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '1.5rem',
             marginBottom: '4rem'
           }}>
             {/* Casual Mode */}
@@ -149,7 +150,7 @@ export default function Home() {
             }}>What We Cover</h3>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
               gap: '1.5rem',
               marginTop: '2rem',
               textAlign: 'left'
