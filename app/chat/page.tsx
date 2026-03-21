@@ -4,14 +4,20 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 function cleanText(str: string) {
-  return str
-    .replace(/&#39;|&#x27;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/[^\x20-\x7E]/g, '')
-    .trim();
+  let s = str;
+  s = s.replace(/&#39;|&#x27;/g, "'");
+  s = s.replace(/&amp;/g, "&");
+  s = s.replace(/&lt;/g, "<");
+  s = s.replace(/&gt;/g, ">");
+  s = s.replace(/&quot;/g, '"');
+  let result = '';
+  for (let i = 0; i < s.length; i++) {
+    const code = s.charCodeAt(i);
+    if (code >= 32 && code <= 126) {
+      result += s[i];
+    }
+  }
+  return result.trim();
 }
 
 export default function ChatPage() {

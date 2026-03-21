@@ -77,6 +77,15 @@ function decodeEntities(str: string) {
   return str.replace(/&#39;/g, "'").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
 }
 
+function cleanStr(s: string) {
+  let r = '';
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charCodeAt(i);
+    if (c >= 32 && c <= 126) r += s[i];
+  }
+  return r.trim();
+}
+
 function parseDiagnostic(text: string, currency: string) {
   // Extract component name from context
   const componentPatterns = [
@@ -112,12 +121,12 @@ function parseDiagnostic(text: string, currency: string) {
     if (!trimmed) continue;
     const bullet = trimmed.match(/^(?:[-*>]|\d+[.)]|[^\x20-\x7E]+)\s*(.+)/);
     if (bullet && checks.length < 8) {
-      const clean = bullet[1].trim()
-        .replace(/[^\x20-\x7E]/g, '')
-        .replace(/&#39;|&#x27;/g, "'")
-        .replace(/&amp;/g, "&")
-        .replace(/&quot;/g, '"')
-        .trim();
+      const clean = cleanStr(
+        bullet[1].trim()
+          .replace(/&#39;|&#x27;/g, "'")
+          .replace(/&amp;/g, "&")
+          .replace(/&quot;/g, '"')
+      );
       if (clean.length > 5) checks.push(clean);
     }
   }
