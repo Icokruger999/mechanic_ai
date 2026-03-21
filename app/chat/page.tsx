@@ -4,22 +4,19 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 function decodeEntities(str: string) {
-  return str
-    .replace(/\xc3[\xa0-\xbf]/g, "")
-    .replace(/\xc2[\x80-\xbf]/g, "")
-    .replace(/\xe2\x80[\x90-\x9f]/g, "'")
-    .replace(/\xe2\x80\xa2/g, "")
-    .replace(/\xe2\x80[\xa0-\xbf]/g, "")
-    .replace(/&#39;|&#x27;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/[\u00e2][\u0080][\u0090-\u009f]/g, "'")
-    .replace(/[\u00e2][\u0080][\u00a2]/g, "")
-    .replace(/[\u00c2][\u00a0-\u00bf]/g, "")
-    .replace(/^[^a-zA-Z0-9(]+/, "")
-    .trim();
+  let s = str;
+  s = s.replace(/â€¢/g, '');
+  s = s.replace(/•/g, '');
+  s = s.replace(/&#39;|&#x27;/g, "'");
+  s = s.replace(/&amp;/g, "&");
+  s = s.replace(/&lt;/g, "<");
+  s = s.replace(/&gt;/g, ">");
+  s = s.replace(/&quot;/g, '"');
+  // Strip all non-ASCII characters from the beginning
+  while (s.length > 0 && s.charCodeAt(0) > 127) {
+    s = s.substring(1);
+  }
+  return s.trim();
 }
 
 export default function ChatPage() {

@@ -110,14 +110,14 @@ function parseDiagnostic(text: string, currency: string) {
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed) continue;
-    const bullet = trimmed.match(/^(?:[-*>]|\d+[.)])\s+(.+)/);
+    const bullet = trimmed.match(/^(?:[-*>•\u2022]|\d+[.)]|â€¢)\s*(.+)/);
     if (bullet && checks.length < 8) {
       const clean = bullet[1].trim()
         .replace(/[\u2018\u2019\u201C\u201D]/g, "'")
         .replace(/&#39;|&#x27;/g, "'")
         .replace(/&amp;/g, "&")
         .replace(/&quot;/g, '"');
-      if (clean.length > 5) checks.push(clean);
+      if (clean.length > 5) checks.push(clean.replace(/^â€¢\s*/, '').replace(/^•\s*/, ''));
     }
   }
   if (checks.length === 0) checks.push("Visual inspection", "Component test", "System scan");
