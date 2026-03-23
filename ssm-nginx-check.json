@@ -1,0 +1,6 @@
+{
+  "commands": [
+    "cat /etc/nginx/conf.d/mechanic.conf",
+    "cat /etc/nginx/sites-available/mechanic 2>/dev/null || echo NO_SITES_AVAILABLE"
+  ]
+}

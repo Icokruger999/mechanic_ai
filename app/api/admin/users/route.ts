@@ -20,8 +20,8 @@ const supabaseAdmin = createClient(
 
 export async function GET() {
   try {
-    // Get all users with their credits
-    const { data: usersData, error: usersError } = await supabase
+    // Get all users with their credits (use admin client to bypass RLS)
+    const { data: usersData, error: usersError } = await supabaseAdmin
       .from('user_credits')
       .select('session_id, user_id, balance, created_at')
       .order('created_at', { ascending: false });
@@ -54,7 +54,7 @@ export async function GET() {
     console.log('Email map:', emailMap);
 
     // Get chat counts per session
-    const { data: chatCounts } = await supabase
+    const { data: chatCounts } = await supabaseAdmin
       .from('chats')
       .select('session_id')
       .then(result => {
@@ -69,7 +69,7 @@ export async function GET() {
       });
 
     // Get message counts per session from messages table
-    const { data: allMessages } = await supabase
+    const { data: allMessages } = await supabaseAdmin
       .from('messages')
       .select('chat_id, created_at');
 
@@ -78,7 +78,7 @@ export async function GET() {
 
     if (allMessages) {
       // First, get chat to session mapping
-      const { data: allChats } = await supabase
+      const { data: allChats } = await supabaseAdmin
         .from('chats')
         .select('id, session_id');
       

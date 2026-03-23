@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "rm -f /etc/nginx/sites-available/mechanic && rm -f /etc/nginx/sites-enabled/mechanic && nginx -t && systemctl reload nginx && echo CLEANED"
+  ]
+}

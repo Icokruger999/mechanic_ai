@@ -1,0 +1,7 @@
+{
+  "commands": [
+    "curl -sI http://www.mechanic.codingeverest.com --resolve www.mechanic.codingeverest.com:80:127.0.0.1",
+    "echo '---'",
+    "curl -skI https://www.mechanic.codingeverest.com --resolve www.mechanic.codingeverest.com:443:127.0.0.1"
+  ]
+}

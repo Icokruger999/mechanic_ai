@@ -2,8 +2,16 @@ import type { Metadata } from "next";
 import "./globals.css?v=3";
 
 export const metadata: Metadata = {
-  title: "Mechanic AI - Your AI Assistant",
-  description: "Your intelligent mechanic assistant powered by AI",
+  title: "Mechanic AI - AI-Powered Vehicle Diagnostics",
+  description: "Get instant, accurate AI-powered car diagnostics. Professional-grade vehicle analysis, repair cost estimates, and maintenance advice. Powered by AWS Bedrock.",
+  keywords: "mechanic AI, car diagnostics, vehicle diagnostics, AI mechanic, car repair, auto repair, engine diagnostics, car problems",
+  openGraph: {
+    title: "Mechanic AI - AI-Powered Vehicle Diagnostics",
+    description: "Get instant, accurate AI-powered car diagnostics with professional-grade precision.",
+    url: "https://mechanic.codingeverest.com",
+    siteName: "Mechanic AI",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

@@ -1,0 +1,10 @@
+{
+  "InstanceIds": ["i-0697142f14b9a852e"],
+  "DocumentName": "AWS-RunShellScript",
+  "Parameters": {
+    "commands": [
+      "printf 'var http=require(\"http\");var d=JSON.stringify({message:\"my car wont start\",vehicle:{year:\"\",make:\"\",model:\"\"},history:[],mode:\"casual\",sessionId:\"test_debug\"});var r=http.request({hostname:\"localhost\",port:3001,path:\"/api/diagnose\",method:\"POST\",headers:{\"Content-Type\":\"application/json\",\"Content-Length\":d.length}},function(res){var b=\"\";res.on(\"data\",function(c){b+=c});res.on(\"end\",function(){try{var j=JSON.parse(b);console.log(\"CHECKS:\",JSON.stringify(j.diagnostic&&j.diagnostic.checks));if(j.diagnostic&&j.diagnostic.checks){j.diagnostic.checks.forEach(function(c,i){var codes=[];for(var x=0;x<Math.min(c.length,10);x++)codes.push(c.charCodeAt(x));console.log(\"C\"+i+\" codes:[\"+codes+\"] text:\"+c)})}}catch(e){console.log(\"ERR\",e.message,b.substring(0,200))}})});r.on(\"error\",function(e){console.log(\"ERR\",e.message)});r.write(d);r.end();' > /tmp/td.js && node /tmp/td.js"
+    ]
+  },
+  "TimeoutSeconds": 120
+}

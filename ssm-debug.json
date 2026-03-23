@@ -1,0 +1,15 @@
+{
+  "commands": [
+    "cat /etc/nginx/conf.d/mechanic.conf",
+    "echo '---'",
+    "nginx -t",
+    "echo '---'",
+    "curl -sI http://localhost:3001",
+    "echo '---'",
+    "dig www.mechanic.codingeverest.com +short",
+    "echo '---'",
+    "ls -la /etc/nginx/sites-enabled/",
+    "echo '---'",
+    "cat /etc/nginx/sites-available/mechanic 2>/dev/null || echo NO_FILE"
+  ]
+}

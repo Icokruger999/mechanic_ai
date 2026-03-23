@@ -1,0 +1,10 @@
+{
+  "InstanceIds": ["i-0697142f14b9a852e"],
+  "DocumentName": "AWS-RunShellScript",
+  "Parameters": {
+    "commands": [
+      "grep -r 'charCodeAt' /var/www/mechanic-ai/.next/static/chunks/ | wc -l",
+      "grep -rl 'charCodeAt' /var/www/mechanic-ai/.next/static/chunks/ | head -3"
+    ]
+  }
+}

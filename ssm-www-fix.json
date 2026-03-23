@@ -1,0 +1,5 @@
+{
+  "commands": [
+    "sed -i 's/server_name mechanic.codingeverest.com;/server_name mechanic.codingeverest.com www.mechanic.codingeverest.com;/g' /etc/nginx/sites-available/mechanic && nginx -t && systemctl reload nginx && certbot --nginx -d mechanic.codingeverest.com -d www.mechanic.codingeverest.com --non-interactive --agree-tos --email ico@astutetech.co.za --expand && echo WWW_FIX_DONE"
+  ]
+}

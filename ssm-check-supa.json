@@ -1,0 +1,10 @@
+{
+  "InstanceIds": ["i-0697142f14b9a852e"],
+  "DocumentName": "AWS-RunShellScript",
+  "Parameters": {
+    "commands": [
+      "printf 'var https=require(\"https\");var opts={hostname:\"rvykzspgrxulqovvgsdx.supabase.co\",path:\"/rest/v1/messages?select=metadata&order=created_at.desc&limit=5&metadata=not.is.null\",headers:{\"apikey\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2eWt6c3Bncnh1bHFvdnZnc2R4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTY5MjY3OCwiZXhwIjoyMDg3MjY4Njc4fQ.r959_OJbmSn8lgTKrJHDAvdbz8e22zvq6JSOLIYBn5I\",\"Authorization\":\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2eWt6c3Bncnh1bHFvdnZnc2R4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MTY5MjY3OCwiZXhwIjoyMDg3MjY4Njc4fQ.r959_OJbmSn8lgTKrJHDAvdbz8e22zvq6JSOLIYBn5I\"}};https.get(opts,function(res){var b=\"\";res.on(\"data\",function(c){b+=c});res.on(\"end\",function(){try{var rows=JSON.parse(b);rows.forEach(function(r){if(r.metadata&&r.metadata.diagnostic&&r.metadata.diagnostic.checks){var checks=r.metadata.diagnostic.checks;checks.forEach(function(c,i){var codes=[];for(var x=0;x<Math.min(c.length,5);x++)codes.push(c.charCodeAt(x));console.log(\"codes:[\"+codes+\"] \"+c.substring(0,40))})}});console.log(\"Total rows:\",rows.length)}catch(e){console.log(\"ERR\",e.message)}})});' > /tmp/check-supa.js && node /tmp/check-supa.js"
+    ]
+  },
+  "TimeoutSeconds": 30
+}
